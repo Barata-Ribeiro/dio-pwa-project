@@ -1,6 +1,13 @@
 import React from 'react';
 import { Row, Col } from 'antd';
 import api from '../resources/api';
+import Economy from './components/Economy';
+import Technology from './components/Technology';
+import World from './components/World';
+
+const MemoEconomy = React.memo(Economy);
+const MemoTechnology = React.memo(Technology);
+const MemoWorld = React.memo(World);
 
 const Home = () => {
   const [news, setNews] = React.useState([]);
@@ -28,21 +35,21 @@ const Home = () => {
 
   return (
     <>
-      <Row gutter={(16, 16)}>
+      <Row gutter={[16, 16]}>
         <Col span={24} md={16}>
           <h2>World</h2>
+          <MemoWorld values={news?.world} />
         </Col>
-      </Row>
-      <hr />
-      <Row gutter={(16, 16)}>
-        <Col span={24} md={16}>
-          <h2>Technology</h2>
-        </Col>
-      </Row>
-      <hr />
-      <Row gutter={(16, 16)}>
-        <Col span={24} md={16}>
+        <Col span={24} md={8}>
           <h2>Economy</h2>
+          <MemoEconomy values={news?.economy} />
+        </Col>
+      </Row>
+      <hr />
+      <Row gutter={[16, 16]}>
+        <Col span={24}>
+          <h2>Technology</h2>
+          <MemoTechnology values={news?.technology} />
         </Col>
       </Row>
     </>

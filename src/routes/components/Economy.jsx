@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'antd';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { createMarkup } from '../../resources/utils';
 
 const Economy = ({ values }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const renderImg = ({ image, description }) => (
     <img src={image.url} alt={description} width="100%" />
@@ -16,13 +16,13 @@ const Economy = ({ values }) => {
   );
 
   const openPost = (id) => {
-    history.push(`/economy/${id}`);
+    navigate(`/economy/${id}`);
   };
 
   const renderPost = (post, index) => {
     const { title, image, description, id } = post;
     return (
-      <Col span={24} md={12} key={`post-${index}`}>
+      <Col span={24} md={12} key={`Economy-${index}`}>
         <article onClick={() => openPost(id)}>
           <p>
             <strong dangerouslySetInnerHTML={createMarkup(title)} />
