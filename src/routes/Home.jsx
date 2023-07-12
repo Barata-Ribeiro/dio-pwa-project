@@ -1,7 +1,24 @@
 import React from 'react';
 import { Row, Col } from 'antd';
+import api from '../resources/api';
 
 const Home = () => {
+  const [news, setNews] = React.useState([]);
+  const [loading, setLoading] = React.useState(false);
+
+  const handleNews = (articles) => {
+    console.log('ar', articles);
+  };
+
+  React.useEffect(() => {
+    setLoading(true);
+    Promise.allSettled([
+      api.getNews('world'),
+      api.getNews('economy'),
+      api.getNews('technology'),
+    ]).then(handleNews);
+  }, []);
+
   return (
     <>
       <Row gutter={(16, 16)}>
