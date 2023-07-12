@@ -7,7 +7,12 @@ const Home = () => {
   const [loading, setLoading] = React.useState(false);
 
   const handleNews = (articles) => {
-    console.log('ar', articles);
+    setLoading(false);
+    setNews({
+      world: articles[0]?.value.value,
+      economy: articles[1]?.value.value,
+      technology: articles[2]?.value.value,
+    });
   };
 
   React.useEffect(() => {
@@ -18,6 +23,8 @@ const Home = () => {
       api.getNews('technology'),
     ]).then(handleNews);
   }, []);
+
+  if (loading) return <div>Loading...</div>;
 
   return (
     <>
